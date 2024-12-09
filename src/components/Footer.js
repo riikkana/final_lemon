@@ -13,6 +13,7 @@ return (
         <p>Little Lemon © 2024</p>
         <p>Some footer text here</p>
     </div>
+
 </footer>
 );
 }

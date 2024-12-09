@@ -1,3 +1,28 @@
+/* Yleinen tyylitys */
+.grid-adjustable-columns {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);  /* Voit säätää haluamasi määrän sarakkeita */
+}
+
+/* Media query pienelle näytölle (max-width: 700px) */
+@media (max-width: 700px) {
+.grid-adjustable-columns {
+  display: grid;
+  grid-auto-flow: row; /* Siirtyy riveihin, ei sarakkeisiin */
+}
+}
+
+/* Media query suurelle näytölle (min-width: 701px) */
+@media (min-width: 701px) {
+.grid-adjustable-columns {
+  width: min(1000px, 75rem); /* Rajoittaa leveyttä */
+  margin: 0 auto;            /* Keskittää */
+  grid-auto-flow: column;    /* Järjestää elementit sarakkeiksi */
+  gap: 1em;                  /* Väli sarakkeiden välillä */
+}
+}
+
+
 body {
   font-family: Arial, sans-serif;
   margin: 10;
