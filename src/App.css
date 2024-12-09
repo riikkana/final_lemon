@@ -1,3 +1,93 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 10;
+  padding: 10;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr); 
+  gap: 20px; 
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.navbar {
+  grid-column: span 12; 
+  text-align: center;
+  background-color: #f5f5f5;
+  padding: 10px 0;
+}
+
+.hero {
+  grid-column: span 12;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: center;
+  background-color: #e3e3e3;
+  padding: 20px;
+}
+
+.hero-text {
+  grid-column: span 6; 
+}
+
+.hero-image {
+  grid-column: span 6; 
+  background-color: #ccc;
+  height: 200px; 
+}
+
+.features {
+  grid-column: span 12;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+}
+
+.feature-box {
+  grid-column: span 4;
+  background-color: #ddd;
+  height: 150px; 
+}
+
+.testimonials {
+  grid-column: span 12;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+  background-color: #f9f9f9;
+  padding: 20px;
+}
+
+.testimonial {
+  grid-column: span 4; 
+  background-color: #eee;
+  height: 100px;
+}
+
+.footer {
+  grid-column: span 12;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+  background-color: #e3e3e3;
+  padding: 20px;
+}
+
+.footer-content {
+  grid-column: span 6; 
+}
+
+.footer-image {
+  grid-column: span 6; 
+  background-color: #ccc;
+  height: 100px; 
+}
+
+
+
 .App {
   text-align: center;
 }
