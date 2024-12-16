@@ -9,6 +9,18 @@ function BookingPage({ availableTimes, updateTimes, selectedDate, setSelectedDat
     const [time, setTime] = useState("");
     const [people, setPeople] = useState(1);
     const [occasion, setOccasion] = useState("");
+    const [formValid, setFormValid] = useState(false);
+
+    useEffect(() => {
+        const isValid =
+            name.trim().length >= 2 && // Nimi vähintään 2 merkkiä
+            time !== "" &&  // Aika valittu
+            people >= 1 && people <= 10 && // Henkilömäärä 1-10
+            selectedDate !== "" && // Päivä valittu
+            occasion !== ""; // Tilaisuus valittu
+
+        setFormValid(isValid);
+    }, [name, time, people, selectedDate, occasion]);
 
     useEffect(() => {
         if (selectedDate) {
@@ -52,12 +64,17 @@ function BookingPage({ availableTimes, updateTimes, selectedDate, setSelectedDat
         }
     };
 
+    const validateName = (value) => {
+        return value.trim().length >= 2;
+    };
+
     return (
         <section className="booking">
             <h2>Book a Table</h2>
             <form
                 style={{ display: 'grid', maxWidth: '200px', gap: '20px' }}
                 onSubmit={handleSubmit}
+                noValidate
             >
                 <label htmlFor="name">Name</label>
                 <input
@@ -66,6 +83,15 @@ function BookingPage({ availableTimes, updateTimes, selectedDate, setSelectedDat
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
+                    minLength={2}
+                    onBlur={(e) => {
+                        if (!validateName(e.target.value)) {
+                            e.target.setCustomValidity('Name must be at least 2 characters long');
+                        } else {
+                            e.target.setCustomValidity('');
+                        }
+                    }}
+                    aria-invalid={!validateName(name)}
                 />
 
                 <label htmlFor="res-date">Choose date</label>
@@ -75,6 +101,8 @@ function BookingPage({ availableTimes, updateTimes, selectedDate, setSelectedDat
                     value={selectedDate}
                     onChange={handleDateChange}
                     required
+                    min={new Date().toISOString().split('T')[0]} // Ei menneitä päiviä
+                    aria-invalid={selectedDate === ""}
                 />
 
                 <label htmlFor="res-time">Choose time</label>
@@ -83,6 +111,7 @@ function BookingPage({ availableTimes, updateTimes, selectedDate, setSelectedDat
                     value={time}
                     onChange={(e) => setTime(e.target.value)}
                     required
+                    aria-invalid={time === ""}
                 >
                     <option value="">Select Time</option>
                     {availableTimes && availableTimes.length > 0 ? (
@@ -106,6 +135,7 @@ function BookingPage({ availableTimes, updateTimes, selectedDate, setSelectedDat
                     min="1"
                     max="10"
                     required
+                    aria-invalid={people < 1 || people > 10}
                 />
 
                 <label htmlFor="occasion">Occasion</label>
@@ -113,17 +143,22 @@ function BookingPage({ availableTimes, updateTimes, selectedDate, setSelectedDat
                     id="occasion"
                     value={occasion}
                     onChange={(e) => setOccasion(e.target.value)}
+                    required
+                    aria-invalid={occasion === ""}
                 >
                     <option value="">Select Occasion</option>
                     <option value="Birthday">Birthday</option>
                     <option value="Anniversary">Anniversary</option>
                 </select>
 
-                <input
+                <button
                     type="submit"
-                    value="Make Your reservation"
+                    disabled={!formValid}
+                    className={!formValid ? "submit-button-disabled" : "submit-button"}
                     aria-label="Make your reservation"
-                />
+                >
+                    Make Your reservation
+                </button>
             </form>
         </section>
     );
