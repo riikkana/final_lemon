@@ -9,7 +9,7 @@ return (
         <Link to="/">Home</Link> 
         <Link to="/about">About</Link>
         <Link to="/menu">Menu</Link> 
-        <Link to="/reservations">Reservations</Link> 
+        <Link to="/booking">Bookings</Link> 
         <Link to="/order-online">Order Online</Link> 
         <Link to="/login">Login</Link> 
     </nav>
